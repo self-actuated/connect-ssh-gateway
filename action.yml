@@ -5,7 +5,7 @@ branding:
   icon: 'arrow-right-circle'
   color: 'gray-dark'
 inputs:
-  sshGatewayAddr:
+  gatewayaddr:
     description: 'The gateway hostname address or IP address.'
     required: true
   secure:
@@ -26,6 +26,6 @@ runs:
         id: connectbg
         env:
           SECURE: ${{ inputs.secure }}
-          SSH_GATEWAY_ADDR: ${{ inputs.sshGatewayAddr }}
+          SSH_GATEWAY_ADDR: ${{ inputs.gatewayaddr }}
         run: |
           /tmp/ssh-gateway -secure ${SECURE} -ip ${SSH_GATEWAY_ADDR} &
