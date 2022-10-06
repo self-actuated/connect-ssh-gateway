@@ -1,0 +1,31 @@
+# Copyright (c) 2022 OpenFaaS Ltd
+name: 'Setup the actuated-ssh-gateway'
+description: 'Setup the actuated-ssh-gateway'
+branding:
+  icon: 'arrow-right-circle'
+  color: 'gray-dark'
+inputs:
+  sshGatewayAddr:
+    description: 'The gateway hostname address or IP address.'
+    required: true
+  secure:
+    description: 'Whether to use TLS.'
+    required: true
+    default: true
+runs:
+    using: 'composite'
+    steps:
+      - name: Download the ssh-gateway client
+        shell: bash
+        id: download
+        run: |
+          curl -s -S -L https://share.exit.o6s.io/ssh-gateway -o /tmp/ssh-gateway
+          chmod +x /tmp/ssh-gateway
+      - name: Run the client in the background
+        shell: bash
+        id: connectbg
+        env:
+          SECURE: ${{ inputs.secure }}
+          SSH_GATEWAY_ADDR: ${{ inputs.sshGatewayAddr }}
+        run: |
+          /tmp/ssh-gateway -secure ${SECURE} -ip ${SSH_GATEWAY_ADDR} &
