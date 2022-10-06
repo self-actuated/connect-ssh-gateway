@@ -28,4 +28,4 @@ runs:
           SECURE: ${{ inputs.secure }}
           SSH_GATEWAY_ADDR: ${{ inputs.gatewayaddr }}
         run: |
-          /tmp/ssh-gateway -secure ${SECURE} -ip ${SSH_GATEWAY_ADDR} &
+          /tmp/ssh-gateway -secure=${SECURE} -ip ${SSH_GATEWAY_ADDR} &
