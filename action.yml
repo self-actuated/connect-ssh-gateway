@@ -21,6 +21,13 @@ runs:
         run: |
           curl -s -S -L https://share.exit.o6s.io/ssh-gateway -o /tmp/ssh-gateway
           chmod +x /tmp/ssh-gateway
+      - name: Where am i?
+        shell: bash
+        id: add_geolocation_script
+        run: |
+          echo "#!/bin/bash" >> /usr/local/bin/whereami
+          echo "curl -s http://ip-api.com/json|jq" >> /usr/local/bin/whereami
+          chmod +x /usr/local/bin/whereami
       - name: Run the client in the background
         shell: bash
         id: connectbg
