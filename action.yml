@@ -25,9 +25,9 @@ runs:
         shell: bash
         id: add_geolocation_script
         run: |
-          echo "#!/bin/bash" >> /usr/local/bin/whereami
-          echo "curl -s http://ip-api.com/json|jq" >> /usr/local/bin/whereami
-          chmod +x /usr/local/bin/whereami
+          echo "#!/bin/bash" | sudo tee -a /usr/local/bin/whereami
+          echo "curl -s http://ip-api.com/json|jq" | sudo tee -a /usr/local/bin/whereami
+          sudo chmod +x /usr/local/bin/whereami
       - name: Run the client in the background
         shell: bash
         id: connectbg
