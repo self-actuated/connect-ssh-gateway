@@ -19,8 +19,9 @@ runs:
         shell: bash
         id: download
         run: |
-          curl -s -S -L https://share.exit.o6s.io/ssh-gateway -o /tmp/ssh-gateway
-          chmod +x /tmp/ssh-gateway
+          curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/gha-connect -o /tmp/gha-connect
+          chmod +x /tmp/gha-connect
+          sudo mv /tmp/gha-connect /usr/local/bin/
       - name: Where am i?
         shell: bash
         id: add_geolocation_script
@@ -35,4 +36,4 @@ runs:
           SECURE: ${{ inputs.secure }}
           SSH_GATEWAY_ADDR: ${{ inputs.gatewayaddr }}
         run: |
-          /tmp/ssh-gateway -secure=${SECURE} -ip ${SSH_GATEWAY_ADDR} &
+          gha-connect -secure=${SECURE} -ip ${SSH_GATEWAY_ADDR} &
