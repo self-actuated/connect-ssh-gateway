@@ -24,7 +24,7 @@ runs:
           then
             binaryName = "gha-connect-arm64"
           fi
-          curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/${binaryName} -o /tmp/gha-connect
+          curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/$binaryName -o /tmp/gha-connect
 
           chmod +x /tmp/gha-connect
           sudo mv /tmp/gha-connect /usr/local/bin/
