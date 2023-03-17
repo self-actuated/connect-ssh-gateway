@@ -19,12 +19,12 @@ runs:
         shell: bash
         id: download
         run: |
-          export binaryName="gha-connect"
           if [ "$(uname -m)" = "aarch64" ]
           then
-            binaryName = "gha-connect-arm64"
+            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/gha-connect-arm64 -o /tmp/gha-connect
+          else
+            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/gha-connect -o /tmp/gha-connect
           fi
-          curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/$binaryName -o /tmp/gha-connect
 
           chmod +x /tmp/gha-connect
           sudo mv /tmp/gha-connect /usr/local/bin/
