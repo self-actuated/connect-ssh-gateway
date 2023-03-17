@@ -19,7 +19,12 @@ runs:
         shell: bash
         id: download
         run: |
-          curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/gha-connect -o /tmp/gha-connect
+          arch=$(uname -m)
+          binary="gha-connect"
+          if [[ $arch == "aarch64" ]];then
+            arch = "gha-connect-arm64"
+          fi
+          curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/${binary} -o /tmp/gha-connect
           chmod +x /tmp/gha-connect
           sudo mv /tmp/gha-connect /usr/local/bin/
       - name: Where am i?
