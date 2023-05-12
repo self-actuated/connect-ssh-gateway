@@ -8,6 +8,7 @@ inputs:
   gateway:
     description: 'The gateway hostname address or IP address.'
     required: false
+    default: ""
 runs:
     using: 'composite'
     steps:
@@ -37,4 +38,4 @@ runs:
         env:
           GATEWAY: ${{ inputs.gateway }}
         run: |
-          gha-connect -url ${GATEWAY} &
+          gha-connect -url ${GATEWAY:-""} &
