@@ -5,13 +5,9 @@ branding:
   icon: 'arrow-right-circle'
   color: 'gray-dark'
 inputs:
-  gatewayaddr:
+  gateway:
     description: 'The gateway hostname address or IP address.'
-    required: true
-  secure:
-    description: 'Whether to use TLS.'
-    required: true
-    default: true
+    required: false
 runs:
     using: 'composite'
     steps:
@@ -21,9 +17,9 @@ runs:
         run: |
           if [ "$(uname -m)" = "aarch64" ]
           then
-            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/gha-connect-arm64 -o /tmp/gha-connect
+            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.2/gha-connect-arm64 -o /tmp/gha-connect
           else
-            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.1/gha-connect -o /tmp/gha-connect
+            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.2/gha-connect -o /tmp/gha-connect
           fi
 
           chmod +x /tmp/gha-connect
@@ -39,7 +35,6 @@ runs:
         shell: bash
         id: connectbg
         env:
-          SECURE: ${{ inputs.secure }}
-          SSH_GATEWAY_ADDR: ${{ inputs.gatewayaddr }}
+          GATEWAY: ${{ inputs.gateway }}
         run: |
-          gha-connect -secure=${SECURE} -ip ${SSH_GATEWAY_ADDR} &
+          gha-connect -url ${GATEWAY} &
