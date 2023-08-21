@@ -39,8 +39,11 @@ runs:
           GATEWAY: ${{ inputs.gateway }}
         run: |
           gha-connect -url ${GATEWAY:-""} &
-          sleep 1
-          if [ "$(gha-connect -confirm)" = "1"]
+
+          gha-connect -confirm
+          EXIT_CODE=$?
+          
+          if [ "$EXIT_CODE" = "1" ]
           then
             exit 1
           fi
