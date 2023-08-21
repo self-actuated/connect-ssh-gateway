@@ -39,3 +39,7 @@ runs:
           GATEWAY: ${{ inputs.gateway }}
         run: |
           gha-connect -url ${GATEWAY:-""} &
+          sleep 1
+          if [ $(gha-connect -confirm) == 1];
+            exit 1
+          fi
