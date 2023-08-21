@@ -40,6 +40,7 @@ runs:
         run: |
           gha-connect -url ${GATEWAY:-""} &
           sleep 1
-          if [ $(gha-connect -confirm) == 1];
+          if [ "$(gha-connect -confirm)" == "1"]
+          then
             exit 1
           fi
