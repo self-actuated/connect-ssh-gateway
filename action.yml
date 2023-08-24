@@ -18,9 +18,9 @@ runs:
         run: |
           if [ "$(uname -m)" = "aarch64" ]
           then
-            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.3/gha-connect-arm64 -o /tmp/gha-connect
+            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.4/gha-connect-arm64 -o /tmp/gha-connect
           else
-            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.3/gha-connect -o /tmp/gha-connect
+            curl -s -S -L https://github.com/alexellis/gha-connect-client/releases/download/v0.0.4/gha-connect -o /tmp/gha-connect
           fi
 
           chmod +x /tmp/gha-connect
